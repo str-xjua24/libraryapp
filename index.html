@@ -10,10 +10,48 @@
 <body>
   <div class="container">
     <h1>Librarian</h1>
-    <button class="btn" id="add-book">Add Book</button>
-
-    <!-- Add Book Modal -->
-    <script src="script.js"></script>
+    <button class="btn" id="add-book-btn">Add Book</button>
+    <div class="book-list">
+      <table id="book-table">
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Pages</th>
+          <th>Status</th>
+        </tr>
+      </table>
+    </div>
   </div>
+
+  <!-- Add Book Modal -->
+  <div class="add-book-modal" id="book-modal">
+    
+    <div class="add-content">
+      <div class="close-wrapper">
+        <span class="close">&times;</span>
+      </div>
+
+      <form action="#" id="modal-form">
+        <label for="title" class="modal-label"><strong>Title</strong></label>
+        <input type="text" class="modal-input" name="title" id="title" placeholder="Enter book title">
+    
+        <label for="author" class="modal-label"><strong>Author</strong></label>
+        <input type="text" class="modal-input" name="author" id="author" placeholder="Enter book author">
+    
+        <label for="pages" class="modal-label"><strong>Pages</strong></label>
+        <input type="number" class="modal-input" name="pages" id="pages" placeholder="Enter book pages">
+        
+        <div class="isRead-wrapper">
+          <label for="isRead" class="modal-label"><strong>Read Yet?</strong></label>
+          <input type="checkbox" class="modal-input" name="isRead" id="isRead" value="true">
+        </div>
+  
+        <div class="submit-btn">
+          <button type="submit" class="btn" id="submit-book-btn">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>

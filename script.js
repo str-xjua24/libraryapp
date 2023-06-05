@@ -11,16 +11,63 @@ function addBookToLibrary(book) {
   myLibrary.push(book);
 }
 
-// const book1 = new Book('Neuromancer', 'William Gibson', 256, 0);
-// const book2 = new Book('Frankenstein', 'Mary Shelley', 332, 1);
-// const book3 = new Book('Darkhold', 'Cthon', 666, 0);
+const addBtn = document.getElementById('add-book-btn');
+const modal = document.getElementById('book-modal');
+const closeModal = document.querySelector('.close');
+const submitModal = document.getElementById('submit-book-btn');
 
-// addBookToLibrary(book1);
-// addBookToLibrary(book2);
-// addBookToLibrary(book3);
+const titleInput = document.getElementById('title');
+const authorInput = document.getElementById('author');
+const pagesInput = document.getElementById('pages');
+const readInput = document.getElementById('isRead');
 
-// myLibrary.forEach(book => {
-//   console.log(book);
-// })
+const libraryTable = document.getElementById('book-table');
 
-const addBtn = document.getElementById('add-book');
+addBtn.addEventListener('click', () => {
+  modal.style.display = 'block';
+});
+
+
+closeModal.addEventListener('click', () => {
+  modal.style.display = 'none';
+});
+
+modal.addEventListener('click', (e) => {
+  if (e.target == modal) {
+    modal.style.display = "none";
+  }
+});
+
+submitModal.addEventListener('click', () => {
+  event.preventDefault();
+  addBookToLibrary(new Book(titleInput.value, authorInput.value, pagesInput.value, readInput.value));
+
+  titleInput.value = ""; 
+  authorInput.value = ""; 
+  pagesInput.value = "";
+  readInput.value = "";
+
+  modal.style.display = 'none';
+
+  const book = myLibrary[myLibrary.length-1];
+
+  const row = document.createElement('tr');
+  const titleCol = document.createElement('td');
+  titleCol.textContent = book.title;
+
+  const authorCol = document.createElement('td');
+  authorCol.textContent = book.author;
+
+  const pagesCol = document.createElement('td');
+  pagesCol.textContent = book.pages;
+
+  const statusCol = document.createElement('td');
+  statusCol.textContent = book.isRead;
+
+  row.appendChild(titleCol);
+  row.appendChild(authorCol);
+  row.appendChild(pagesCol);
+  row.appendChild(statusCol);
+
+  libraryTable.appendChild(row);
+});
