@@ -14,8 +14,7 @@ body {
 }
 
 .container {
-  width: 800px;
-  min-width: 400px;
+  width: 60%;
   text-align: center;
 }
 
@@ -23,6 +22,7 @@ h1 {
   font-size: 38px;
 }
 
+/* Button styles */
 .btn {
   background-color: #b100e8;
   border: none;
@@ -38,7 +38,33 @@ h1 {
   background-color: #8002a7;
 }
 
-/* Modal for adding book */
+.btn-status {
+  background-color: #008CBA;
+  box-shadow: none;
+}
+
+.btn-status:hover {
+  background-color: #015d7c;
+}
+
+.btn-status-complete {
+  background-color: #4CAF50;
+}
+
+.btn-status-complete:hover {
+  background-color: #377a39;
+}
+
+.btn-delete {
+  background-color: #f44336;
+  box-shadow: none;
+}
+
+.btn-delete:hover {
+  background-color: #9c2d25;
+}
+
+/* Modal style */
 .add-book-modal {
   display: none;
   position: fixed;
@@ -58,6 +84,7 @@ h1 {
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
+  border-radius: 4px;
   width: 400px;
 }
 
@@ -105,6 +132,7 @@ h1 {
 
 /* Display book list */
 .book-list {
+  text-align: center;
   border-top: 1px solid #aaa;
   margin: 20px;
   display: flex;
