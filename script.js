@@ -1,4 +1,5 @@
 let myLibrary = [];
+let numOfBooks = 0;
 
 const addBtn = document.getElementById('add-book-btn');
 const modal = document.getElementById('book-modal');
@@ -20,10 +21,15 @@ function Book(title, author, pages, isRead) {
   this.isRead = isRead;
 }
 
+Book.prototype.toggleReadStatus = () => {
+  console.log('do something');
+}
+
 function updateDOM() {
   const book = myLibrary[myLibrary.length-1];
 
   const row = document.createElement('tr');
+
   const titleCol = document.createElement('td');
   titleCol.textContent = book.title;
 
@@ -37,7 +43,11 @@ function updateDOM() {
   const statusBtn = document.createElement('button');
   statusBtn.classList.add('btn', 'btn-status');
 
-  statusBtn.textContent = book.isRead;
+  if (book.isRead === 'true') {
+    statusBtn.textContent = 'Read';
+  } else {
+    statusBtn.textContent = 'Not Read';
+  }
 
   const deleteCol = document.createElement('td');
   const deleteBtn = document.createElement('button');
@@ -58,19 +68,30 @@ function updateDOM() {
     const targetCol = e.target.parentElement;
 
     targetCol.parentElement.remove();
+
+    myLibrary = myLibrary.filter((book) => {
+      return book.title !== targetCol.parentElement.firstChild.textContent;
+    });
+
+    numOfBooks--;
+    console.log('Number of books in library: ' + numOfBooks);
   });
 
   statusBtn.addEventListener('click', e => {
     if (e.target.textContent === 'Read') {
       e.target.textContent = 'Not Read';
+      book.isRead = 'false';
     } else {
       e.target.textContent = 'Read';
+      book.isRead = 'true';
     }
   });
 }
 
 function addBookToLibrary(book) {
   myLibrary.push(book);
+  numOfBooks++;
+  console.log('Number of books in library: ' + numOfBooks);
 }
 
 addBtn.addEventListener('click', () => {
@@ -90,9 +111,9 @@ modal.addEventListener('click', (e) => {
 
 submitModal.addEventListener('click', () => {
   event.preventDefault();
-  let readStatus = 'Not Read';
+  let readStatus = "false";
   if (readInput.checked) {
-    readStatus = 'Read';
+    readStatus = "true";
   }
   addBookToLibrary(new Book(titleInput.value, authorInput.value, pagesInput.value, readStatus));
 
